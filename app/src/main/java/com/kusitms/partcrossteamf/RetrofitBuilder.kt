@@ -7,7 +7,7 @@ object RetrofitBuilder{
     var api: RetrofitService
     init {
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://13.124.181.85/")
+            .baseUrl("https://kusitms.shop/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         api = retrofit.create(RetrofitService::class.java)
