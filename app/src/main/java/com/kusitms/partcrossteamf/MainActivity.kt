@@ -17,14 +17,14 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             PartCrossTeamFTheme {
-               FApp()
+                FApp()
             }
         }
     }
 }
 
 @Composable
-fun FApp(){
+fun FApp() {
     val navController = rememberNavController()
     // viewModel
     NavHostScreen(navController = navController)
@@ -34,9 +34,16 @@ fun FApp(){
 fun NavHostScreen(navController: NavHostController) {
     NavHost(navController = navController, startDestination = Screen.Home.name) {
         composable(Screen.Home.name) {
-            HomeScreen()
+            HomeScreen(
+                onClickCreate = {
+                    navController.navigate(Screen.Create.name)
+                },
+                onClickDetailed = {
+                    navController.navigate(Screen.Detail.name)
+                }
+            )
         }
-        composable(Screen.Write.name) {
+        composable(Screen.Create.name) {
             // todo
         }
         composable(Screen.Detail.name) {
@@ -46,13 +53,13 @@ fun NavHostScreen(navController: NavHostController) {
 }
 
 enum class Screen {
-    Home, Write, Detail
+    Home, Create, Detail
 }
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     PartCrossTeamFTheme {
-        HomeScreen()
+        HomeScreen({}, {})
     }
 }

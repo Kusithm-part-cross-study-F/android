@@ -1,6 +1,7 @@
 package com.kusitms.partcrossteamf.ui
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -27,11 +28,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.kusitms.partcrossteamf.model.Article
 import com.kusitms.partcrossteamf.ui.theme.Typography
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(onClickDetailed: (Article) -> Unit, onClickCreate: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -43,7 +45,9 @@ fun HomeScreen() {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(text = "Blog", style = Typography.titleLarge)
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(onClick = {
+                onClickCreate
+            }) {
                 Icon(Icons.Default.Create, contentDescription = "글 작성하기")
             }
         }
@@ -52,7 +56,9 @@ fun HomeScreen() {
                 .fillMaxWidth()
                 .height(28.dp)
         )
-        ArticleContents()
+        ArticleContents{
+            onClickDetailed(it)
+        }
     }
 }
 
@@ -69,30 +75,34 @@ val list = listOf<Article>(
 )
 
 @Composable
-fun ArticleContents() {
+fun ArticleContents(moveDetail: (Article) -> Unit) {
     val articles = remember {
         list
     }
     LazyColumn() {
         items(
             items = articles,
-            itemContent = { ArticleListItem(it) }
+            itemContent = { article ->
+                ArticleListItem(article) {
+                    moveDetail(article)
+                }
+            }
         )
     }
 }
 
 @Composable
-fun ArticleListItem(article: Article) {
+fun ArticleListItem(article: Article, onClickDetailed: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 12.dp, vertical = 8.dp),
+            .padding(horizontal = 12.dp, vertical = 8.dp)
+            .clickable { onClickDetailed() },
         elevation = CardDefaults.cardElevation(
             defaultElevation = 4.dp
         ),
         shape = RoundedCornerShape(corner = CornerSize(4.dp)),
-        border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary)
-
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary),
     ) {
         Column(
             modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
