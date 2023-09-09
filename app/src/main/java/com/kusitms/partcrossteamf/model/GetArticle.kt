@@ -1,18 +1,16 @@
 package com.kusitms.partcrossteamf.model
-
 import com.google.gson.annotations.SerializedName
 
-
-data class ApiResponse(
+data class GetArticleApiResponse(
     @SerializedName("isSuccess")
     val isSuccess: Boolean,
     @SerializedName("message")
     val message: String,
     @SerializedName("data")
-    val data: List<Article>
+    val data: GetArticle
 )
 
-data class Article(
+data class GetArticle(
     @SerializedName("articleId")
     val articleId: Int,
     @SerializedName("title")
