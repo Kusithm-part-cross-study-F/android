@@ -9,6 +9,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.kusitms.partcrossteamf.ui.CreateScreen
+import com.kusitms.partcrossteamf.ui.DetailScreen
 import com.kusitms.partcrossteamf.ui.HomeScreen
 import com.kusitms.partcrossteamf.ui.theme.PartCrossTeamFTheme
 
@@ -44,10 +46,10 @@ fun NavHostScreen(navController: NavHostController) {
             )
         }
         composable(Screen.Create.name) {
-            // todo
+            CreateScreen()
         }
         composable(Screen.Detail.name) {
-            // todo
+            DetailScreen()
         }
     }
 }
