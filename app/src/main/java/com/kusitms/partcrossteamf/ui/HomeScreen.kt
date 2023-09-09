@@ -29,11 +29,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.kusitms.partcrossteamf.model.Article
+import com.kusitms.partcrossteamf.model.GetAllArticle
 import com.kusitms.partcrossteamf.ui.theme.Typography
 
 @Composable
-fun HomeScreen(onClickDetailed: (Article) -> Unit, onClickCreate: () -> Unit) {
+fun HomeScreen(onClickDetailed: (GetAllArticle) -> Unit, onClickCreate: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -62,8 +62,8 @@ fun HomeScreen(onClickDetailed: (Article) -> Unit, onClickCreate: () -> Unit) {
     }
 }
 
-val list = listOf<Article>(
-    Article(
+val list = listOf<GetAllArticle>(
+    GetAllArticle(
         0,
         "즐거운 개발 시간",
         "description description description description",
@@ -75,7 +75,7 @@ val list = listOf<Article>(
 )
 
 @Composable
-fun ArticleContents(moveDetail: (Article) -> Unit) {
+fun ArticleContents(moveDetail: (GetAllArticle) -> Unit) {
     val articles = remember {
         list
     }
@@ -92,7 +92,7 @@ fun ArticleContents(moveDetail: (Article) -> Unit) {
 }
 
 @Composable
-fun ArticleListItem(article: Article, onClickDetailed: () -> Unit) {
+fun ArticleListItem(article: GetAllArticle, onClickDetailed: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
