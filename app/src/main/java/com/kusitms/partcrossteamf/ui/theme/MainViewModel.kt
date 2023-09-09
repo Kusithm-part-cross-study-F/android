@@ -26,12 +26,13 @@ class MainViewModel: ViewModel() {
                 response: Response<GetAllArticleApiResponse>
             ) {
                 if(response.isSuccessful){
-                    Log.d("testt", "success")
+                    val data = response.body()!!.data
+                    Log.d("testt", data.size.toString())
                 }
             }
 
             override fun onFailure(call: Call<GetAllArticleApiResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+                Log.d("testt", t.message.toString())
             }
         })
     }
